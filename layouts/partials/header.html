@@ -16,7 +16,8 @@
               <a href="{{.URL}}">{{.Name}}</a>
             </li>
         {{end}}{{end}}
-      </ul></div>
+      </ul>
+      </div>
 
       <div class="site-nav-right">
         <div class="social-links">
@@ -34,10 +35,12 @@
         <a class="subscribe-button" href="{{.Site.Params.RSSLink }}">Subscribe</a>
         {{else if .Site.Params.showSubscribe}}
         <a class="subscribe-button" href="{{if .IsNode}}{{.RSSLink}}{{else}}{{"index.xml" | absURL}}{{end}}">Subscribe</a>
-        {{end}}    
-      </div>
+        {{end}}
 
-    </nav>  
+
+      </div>
+        {{partial "nav-language" .}}
+    </nav>
 
   </div>
 </header>

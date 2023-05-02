@@ -32,7 +32,7 @@
         <a class="subscribe-button" href="{{if .IsNode}}{{.RSSLink}}{{else}}{{"index.xml" | absURL}}{{end}}">Subscribe</a>
         {{end}}    
       </div>
-
+    {{partial "nav-language" .}}
     </nav>  
 
     <div class="site-header-content">

@@ -1,8 +1,18 @@
 <article class="post-full post"> 
     <header class="post-full-header">
         <section class="post-full-meta">
-            <time class="post-full-meta-date" datetime="{{.Date.Format "2006-01-02"}}">{{ .Date.Format "2 January 2006" | safeHTML }}</time>{{if .Params.tags }}
+            <div class="first-line">
+            {{ $date := .Date.UTC.Format "Jan 2, 2006" }}
+            {{ $lastmod := .Lastmod.UTC.Format "Jan 2, 2006" }}
+            <time class="post-full-meta-date" datetime="{{.Date.Format "2006-01-02"}}">{{ .Date | time.Format ":date_long" | safeHTML }}</time>
+
+            {{if .Params.tags }}
                 <span class="date-divider">/</span> {{ range $index, $tag := .Params.tags }}{{if lt $index 2}}<a href="{{$.Site.BaseURL}}tags/{{ $tag | urlize }}/">#{{$tag}}</a>&nbsp;{{end}}{{end}}{{ end }}
+
+            </div>
+            {{ if and (ne $lastmod $date) (gt .Lastmod .Date) }}
+            <div class="second-line">(last updated:&nbsp;<time class="post-full-meta-date" datetime="{{.Lastmod.Format "2006-01-02"}}">{{ .Lastmod | time.Format ":date_long" | safeHTML }}</time>)</div>
+            {{end}}
         </section>
         <h1 class="post-full-title">{{.Title}}</h1>
     </header>
@@ -14,10 +24,11 @@
 
     <section class="post-full-content">
         <div class="kg-card-markdown">
+            {{ partial "i18nlist-header.html" .}}
         {{ .Content }}    
         </div>
+        {{ partial "i18nlist-bottom.html" .}}
     </section>
-
     <footer class="post-full-footer">
       <section class="author-card">
         <img class="author-profile-image" src="{{ (.Params.authorAvatar | default .Site.Params.authorAvatar) | absURL}}" alt="Author" />

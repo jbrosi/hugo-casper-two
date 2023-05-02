@@ -32,8 +32,8 @@
         <a class="subscribe-button" href="{{if .IsNode}}{{.RSSLink}}{{else}}{{"index.xml" | absURL}}{{end}}">Subscribe</a>
         {{end}}    
       </div>
-
-    </nav>  
+    {{partial "nav-language" .}}
+    </nav>
 
     <div class="site-header-content">
         <h1 class="site-title">{{.Title}}</h1>{{$.Scratch.Set "total" (len .Data.Pages)}}
