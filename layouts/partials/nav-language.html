@@ -1,0 +1,7 @@
+<nav class="site-nav-lng">
+    <ul class="languages-menu" role="menu">
+        {{ range .Site.Home.AllTranslations }}
+        <li class="{{if eq $.Page.Lang .Language.Lang}}nav-current{{else}}{{end}}" role="menuitem"><a href="{{ .Permalink }}">{{if eq $.Page.Lang .Language.Lang}}<span class="globe">🌐</span>{{end}}{{ .Language.Lang }}</a></li>
+        {{ end }}
+    </ul>
+</nav>
